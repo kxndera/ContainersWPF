@@ -1,0 +1,45 @@
+﻿<Window x:Class="Zadanie_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadanie_1"
+        mc:Ignorable="d"
+        Title="Mystical Wise Tree" Height="400" Width="700" Icon="/tree.jpg" ResizeMode="NoResize" Background="#FF14DA76">
+
+    <StackPanel>
+        <StackPanel.Background>
+            <ImageBrush ImageSource="/wise_mystical_tree_lore.jpg"/>
+        </StackPanel.Background>
+
+        <!--Name-->
+        <TextBlock HorizontalAlignment="Center" Text="Podaj imię:" FontWeight="Bold" FontSize="17" Foreground="Black">
+            <TextBlock.Background>
+                <SolidColorBrush Color="White" Opacity="0.28"/>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBox Height="20" Name="TextBoxYourName" Background="#FFC9D3CA" Opacity="0.75"/>
+
+        
+        <!--Age-->
+        <TextBlock HorizontalAlignment="Center" Text="Podaj wiek:" FontWeight="Bold" FontSize="17">
+            <TextBlock.Background>
+                <SolidColorBrush Color="White" Opacity="0.28"/>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBox Height="20" Name="TextBoxYourAge"  Background="#FFC9D3CA" Opacity="0.75"/>
+
+
+        <!--TextBlocks-->
+        <TextBlock Name="BlockOutcomeName" FontSize="20" Margin="5 10 450 0" Width="246" Foreground="Black" />
+        <TextBlock Name="BlockOutcomeAge"  FontSize="20" Margin="5 10 450 0" Width ="200" Foreground="Black"/>
+        <TextBlock Name="BlockOutcomeAgeIsLegal"  FontSize="20" Margin="5 10 450 0" Width ="206" Foreground="Black"/>
+        <TextBlock Name="BlockErrorsName"  FontSize="17" Foreground="Red" Margin="500 0 1 0 " Width="180"/>
+        <TextBlock Name="BlockErrorsAge" FontSize="17" Foreground="Red" Margin="470 0 1 0 "/>
+        
+        <!--Button-->
+        <Button Content="Sprawdź" x:Name="ButtonCheck" Click="ButtonCheck_Click" Margin="0 70 0 0" Width="200" Background="#FF5C5543" Foreground="white"/>
+        <Button Content="Sprawdź" Name="ButtonCheckBind" Click="ButtonCheckBind_Click" Margin="0 5 0 0 " Width="200"  Background="#FF4B6410" Foreground="white"/>
+       
+    </StackPanel>
+</Window>

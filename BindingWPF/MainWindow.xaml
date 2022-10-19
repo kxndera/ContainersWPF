@@ -1,0 +1,39 @@
+﻿<Window x:Class="BindingWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BindingWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Name="ThisWindow" Background="#FFDEFCE4">
+    <StackPanel>
+        <WrapPanel>
+            <TextBlock  Text="Value:"/>
+            <TextBlock Name="TextBlockValue"/>
+            <Button Content="Text"/>
+        </WrapPanel>
+        <TextBox Name="TextBoxValue" TextChanged="TextBoxValue_TextChanged"/>
+
+        <TextBlock Text="version w/ binding" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+
+
+        <WrapPanel>
+            <TextBlock  Text="Value:"/>
+            <TextBlock  Text="{Binding ElementName=TextBoxBindingValue, Path=Text}"/>
+           
+          
+        </WrapPanel>
+        <TextBox Name="TextBoxBindingValue"/>
+        <TextBlock Text="Tytuł okna" FontWeight="Bold" FontSize="20"/>
+        <TextBox Text="{Binding ElementName=ThisWindow, Path=Title, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Komunikat:" FontWeight="Bold" FontSize="20"/>
+        <TextBox Name="textBoxCom" Margin="10" Text="{Binding ElementName=ThisWindow, Path=Message}"/>
+        
+        <Button Content="Wyświetl komunikat" Click="Button_Click" Background="#FF78FF66"/>
+        
+        <TextBlock Text="Liczby Pseudolosowe:" FontWeight="Bold" FontSize="20"/>
+        <TextBlock Margin="10" Text="{Binding ElementName=ThisWindow, Path=RandomNumber}"/>
+        <Button Content="Losuj" Click="Button_Click_1" Background="#FF78FF66"/>
+    </StackPanel>
+</Window>

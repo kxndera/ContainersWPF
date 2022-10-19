@@ -19,5 +19,8 @@
             </Button.RenderTransform>
         </Button>
         <Button Content="Dock Panel" Canvas.Left="361" Canvas.Top="280" Height="89" Width="111" Name ="buttonDockPanel"  Click="buttonDockPanel_Click"  RenderTransformOrigin="0.58,0.868"/>
+        <Grid Height="434" Width="800">
+            <Button Content="Grid" HorizontalAlignment="Left" Margin="630,252,0,0" Name ="buttonGrid" Click="buttonGrid_Click" VerticalAlignment="Top" Height="76" Width="108"/>
+        </Grid>
     </Canvas>
 </Window>

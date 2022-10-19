@@ -42,5 +42,11 @@ namespace ContainersWPF
             WindowDockPanel windowDockPanel = new WindowDockPanel();
             windowDockPanel.Show();
         }
+        private void buttonGrid_Click(object sender, RoutedEventArgs e)
+        {
+            WindowGrid windowGrid = new WindowGrid();
+            windowGrid.Show();
+
+        }
     }
 }

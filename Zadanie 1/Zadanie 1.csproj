@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>Zadanie_1</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="wise_mystical_tree_lore.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="grasses.png" />
+    <Resource Include="image-removebg-preview.png" />
+    <Resource Include="maxresdefault.jpg" />
+    <Resource Include="oh-the-misery-everybody-wanna-be-my-enemy.gif" />
+    <Resource Include="tree.jpg" />
+    <Resource Include="wise_mystical_tree_lore.jpg" />
+    <Resource Include="wp10187377-koto-no-ha-no-niwa-wallpapers.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pictures\" />
+  </ItemGroup>
+
+</Project>
