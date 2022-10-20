@@ -34,8 +34,57 @@ namespace Zadanie_1
 
         }
 
+        #region without Binding
         public string nameValue;
         public string ageValue;
+        #endregion
+
+        #region Binding
+
+        public string nameValueString;
+        public string nameValueProp { 
+            get {
+                return nameValueString;    
+            }
+            set {
+                nameValueString = nameValue;
+                
+            } 
+        }
+
+        public string ageValueString;
+        public string ageValueProp { 
+            get { 
+                return ageValueString;
+            } 
+            set{
+                ageValueString = ageValue;
+            } 
+        }
+        public string OutcomeString;
+        public string Outcome { 
+            get { 
+                return OutcomeString;
+            }
+            set {
+                OutcomeString = value;
+                OnPropertyChanged(nameof(Outcome));
+            }
+        }
+
+        public string legalAgeString;
+        public string legalAgeProp {
+            get { 
+            return legalAgeString;
+            }
+
+            set { 
+                legalAgeString = value;
+                OnPropertyChanged(nameof(legalAgeProp));
+            }
+        }
+
+        #endregion
 
 
         #region Errors
@@ -45,8 +94,8 @@ namespace Zadanie_1
         public string AgeIsNotADigit = "Podany wiek nie jest cyfrą";
         public string AgeOutOfRange = "Wiek jest z poza zakresu";
 
-        public string LegalAge = "jesteś pełnoletni";
-        public string NotLegalAge = "jesteś niepełnoletni";
+        public string LegalAge = "jesteś pełnoletni/a";
+        public string NotLegalAge = "jesteś niepełnoletni/a";
         #endregion
 
         #region INotifyPropertyChanged
@@ -58,12 +107,17 @@ namespace Zadanie_1
         }
 
         #endregion
-
-        private void ButtonCheck_Click(object sender, RoutedEventArgs e)
+        public void TakeValuesFromTextBoxes()
         {
             nameValue = TextBoxYourName.Text.Trim();
 
             ageValue = TextBoxYourAge.Text.Trim();
+        }
+        private void ButtonCheck_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            TakeValuesFromTextBoxes();
 
             Validate();
 
@@ -72,6 +126,15 @@ namespace Zadanie_1
 
         private void ButtonCheckBind_Click(object sender, RoutedEventArgs e)
         {
+
+            TakeValuesFromTextBoxes();
+           if(Validate())
+            {
+                ResultingAgeBinding();
+
+            }
+            ShowErrors();
+
 
         }
 
@@ -82,9 +145,12 @@ namespace Zadanie_1
         {
             if (nameValue.Length == 0)
             {
+                BlockErrorsName.Text = NameError;
                 return true;
+                
             }
-            else return false;
+            else   return false;
+
         }
 
         public void ResultingName()
@@ -101,12 +167,27 @@ namespace Zadanie_1
             }
         }
 
+        public void ResultingNameBinding()
+        {
+            if (IsNameValueNull())
+            {
+                BlockErrorsName.Text = NameError;
+                 Outcome = "";
+            }
+            else if (!IsNameValueNull())
+            {
+                Outcome= "Witaj " + nameValue;
+                BlockErrorsName.Text = "";
+            }
+        }
+
         public bool CheckName()
         {
-
-            IsNameValueNull();
-            ResultingName();
-            return true;
+            if (!IsNameValueNull())
+            {
+                return true;
+            }
+            else return false;
 
         }
 
@@ -126,15 +207,17 @@ namespace Zadanie_1
             }
             else return true;
         }
+
+
         public bool IsAgeANumber(string ageValue)
         {
             if (int.TryParse(ageValue, out int intAgeValue))
             {
                 return true;
             }
-
-            else return false;
-
+            
+            return false;
+            
         }
 
         public bool IsAgeWithinRange()
@@ -147,8 +230,9 @@ namespace Zadanie_1
                     return true;
                 }
                 
-            }
-            return false;
+
+            }  return false;
+            
         }
         public bool IsLegalAge()
         {
@@ -163,7 +247,23 @@ namespace Zadanie_1
 
         }
 
+        public void ShowErrors()
+        {
+            if (!IsNotEmpty())
+            {
+                BlockErrorsAge.Text = AgeError;
+            }
 
+           else if (!IsAgeANumber(ageValue))
+            {
+                BlockErrorsAge.Text = AgeIsNotADigit;
+            }
+
+            else if (!IsAgeWithinRange())
+            {
+                BlockErrorsAge.Text = AgeOutOfRange;
+            }
+        }
 
         public void ResultingAge()
         {
@@ -177,34 +277,31 @@ namespace Zadanie_1
                 BlockOutcomeAge.Text = "Masz " + ageValue + " lat";
                 BlockOutcomeAgeIsLegal.Text = NotLegalAge;
             }
-            if (!IsAgeANumber(ageValue))
-            {
-                BlockErrorsAge.Text = AgeIsNotADigit;
-            }
-
         }
 
+        public void ResultingAgeBinding()
+        {
+            if (IsLegalAge())
+            {
+                Outcome = "Masz " + ageValue + " lat";
+                legalAgeProp = LegalAge;
+            }
+            else
+            {
+                Outcome= "Masz " + ageValue + " lat";
+                legalAgeProp = NotLegalAge;
+            }
+        }
         public bool CheckAge()
         {
 
-            if (IsNotEmpty())
+
+            if (IsNotEmpty() && IsAgeANumber(ageValue) && IsAgeWithinRange())
             {
-                if (IsAgeANumber(ageValue))
-                { 
-                    IsAgeWithinRange();
-                        ResultingAge();
-                        BlockErrorsAge.Text = "";
-                        return true;
-
-                }
-                else BlockErrorsAge.Text = AgeIsNotADigit;
-                return false;
+                BlockErrorsAge.Text = "";
+                return true;
             }
-
-            else BlockErrorsAge.Text = AgeError;
-            return false;
-
-            
+            else return false;
 
         }
 
@@ -212,76 +309,27 @@ namespace Zadanie_1
 
         public bool Validate()
         {
-            if (CheckName() && CheckAge() == true)
+            if (CheckName() && CheckAge())
             {
-
+                ResultingName();
+                ResultingAge();
                 return true;
             }
-            else if (!IsNameValueNull() && !IsNotEmpty())
+            else
             {
-                BlockOutcomeName.Text = "";
-                BlockOutcomeAge.Text = "";
-            } return false;
-                
-            
-           
-           
+                ShowErrors();
+                return false;
+            }
+
+
+
         }
         #endregion
 
-        #region Previous version of checking
-
-        //public void CheckAge()
-        //{
-        ////    string wiek = TextBoxYourAge.Text;
-
-
-
-        ////    if (int.TryParse(wiek, out int userAge))
-        ////    {
-
-        ////        BlockErrorsAge.Text = "";
-        ////        if(userAge > 18)
-        ////        {
-        ////            BlockOutcomeAge.Text =  wiek +  " pełnoletni";
-        ////        }
-        ////        if (userAge < 18 && userAge > 0)
-        ////        {
-        ////            BlockOutcomeAge.Text = wiek + " niepełnoletni";
-        ////        }
-        ////        if (userAge > 130)
-        ////        {
-        ////         BlockErrorsAge.Text =  "Podano zbyt dużą wartość";
-        ////            BlockOutcomeAge.Text = "";
-        ////        }
-        ////    }
-        ////    else
-        ////    {
-        ////        BlockErrorsAge.Text = "Podana błędny wiek";
-        ////    }
-        //}
-        //public void CheckName()
-        //{
-        //    string name = TextBoxYourName.Text;
-
-
-
-        //    int nameLength = TextBoxYourName.Text.Length;
-
-        //    if (nameLength == 0)
-        //    {
-        //        BlockErrorsName.Text = "Brak podanego imienia";
-        //    }
-        //    else
-        //    {
-        //        BlockOutcomeName.Text = "Witaj " + name;
-        //        BlockErrorsName.Text = "";
-        //    }
-
-
-        //}
-
-        #endregion
 
     }
 }
+
+    
+
+

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zadanie_1"
         mc:Ignorable="d"
+        Name = "ThisWindow"
         Title="Mystical Wise Tree" Height="400" Width="700" Icon="/tree.jpg" ResizeMode="NoResize" Background="#FF14DA76">
 
     <StackPanel>
@@ -31,10 +32,10 @@
 
 
         <!--TextBlocks-->
-        <TextBlock Name="BlockOutcomeName" FontSize="20" Margin="5 10 450 0" Width="246" Foreground="Black" />
-        <TextBlock Name="BlockOutcomeAge"  FontSize="20" Margin="5 10 450 0" Width ="200" Foreground="Black"/>
-        <TextBlock Name="BlockOutcomeAgeIsLegal"  FontSize="20" Margin="5 10 450 0" Width ="206" Foreground="Black"/>
-        <TextBlock Name="BlockErrorsName"  FontSize="17" Foreground="Red" Margin="500 0 1 0 " Width="180"/>
+        <TextBlock Name="BlockOutcomeName" FontSize="20" Margin="5 10 450 0" Width="246"  Foreground="Green" Text="{Binding ElementName=ThisWindow, Path=nameValueProp}" />
+        <TextBlock Name="BlockOutcomeAge"  FontSize="20" Margin="5 10 450 0" Width ="200" Foreground="Green" Text="{Binding ElementName=ThisWindow, Path=ageValueProp}"/>
+        <TextBlock Name="BlockOutcomeAgeIsLegal"  FontSize="20" Margin="5 10 450 0" Width ="206" Foreground="Green" Text="{Binding ElementName=ThisWindow, Path=legalAgeProp}"/>
+        <TextBlock Name="BlockErrorsName"  FontSize="17" Foreground="Red" Margin="500 0 1 0 " Width="180"   />
         <TextBlock Name="BlockErrorsAge" FontSize="17" Foreground="Red" Margin="470 0 1 0 "/>
         
         <!--Button-->
