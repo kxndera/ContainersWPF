@@ -39,6 +39,8 @@ namespace Zadanie_1
         public string ageValue;
         #endregion
 
+
+
         #region Binding
 
         public string nameValueString;
@@ -141,6 +143,8 @@ namespace Zadanie_1
         public string NotLegalAge = "jesteś niepełnoletni/a";
         #endregion
 
+
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -151,14 +155,18 @@ namespace Zadanie_1
 
         #endregion
 
+
+
         #region Buttons
         private void ButtonCheck_Click(object sender, RoutedEventArgs e)
         {
-
-
             TakeValuesFromTextBoxes();
-            Validate();
-
+            DeleteAllRecords();
+            if (Validate())
+            {
+                ShowResults();
+            }
+            else ShowErrors();
 
         }
 
@@ -166,15 +174,20 @@ namespace Zadanie_1
         {
 
             TakeValuesFromTextBoxes();
+            DeleteAllRecords();
             if (Validate())
             {
                 ShowResultBind();
             }
+            else ShowErrorsBinding();
+
 
 
 
         }
         #endregion 
+
+
 
         #region Take Values from both Textboxes
         public void TakeValuesFromTextBoxes()
@@ -185,7 +198,15 @@ namespace Zadanie_1
         }
         #endregion
 
-        #region Show Result from Binding
+
+
+        #region Show Results
+
+        public void ShowResults()
+        {
+            ResultingName();
+            ResultingAge();
+        }
         public void ShowResultBind()
         {
 
@@ -193,6 +214,17 @@ namespace Zadanie_1
             ResultingAgeBinding();
         }
         #endregion
+
+
+
+       public void DeleteAllRecords()
+        {
+            BlockOutcomeName.Text = "";
+            BlockOutcomeAge.Text = "";
+            BlockOutcomeAgeIsLegal.Text = "";
+        }
+
+
 
         #region Validation
 
@@ -292,12 +324,12 @@ namespace Zadanie_1
                 {
                     return true;
                 }
-
-
             }
             return false;
-
         }
+
+
+
         public bool IsLegalAge()
         {
             int intAgeValue = int.Parse(ageValue);
@@ -349,6 +381,8 @@ namespace Zadanie_1
                 AgeErrors = AgeOutOfRange;
             }
         }
+
+
         #endregion
 
         #region Results
@@ -404,19 +438,11 @@ namespace Zadanie_1
         {
             if (CheckName() && CheckAge())
             {
-                ResultingName();
-                ResultingAge();
+                ShowResults();
                 return true;
-            }
-            else
-            {
-                ShowErrors();
-                ShowErrorsBinding();
-                BlockOutcomeName.Text = "";
-                BlockOutcomeAge.Text = "";
-                BlockOutcomeAgeIsLegal.Text = "";
-                return false;
-            }
+            } 
+            return false;
+            
         }
         #endregion
 
