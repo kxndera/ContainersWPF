@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
+
+
 namespace Zadanie_1
 {
 
@@ -71,19 +73,6 @@ namespace Zadanie_1
             }
         }
 
-        public string OutcomeString;
-        public string Outcome
-        {
-            get
-            {
-                return OutcomeString;
-            }
-            set
-            {
-                OutcomeString = value;
-                OnPropertyChanged(nameof(Outcome));
-            }
-        }
 
         public string legalAgeString;
         public string LegalAgeProp
@@ -132,31 +121,31 @@ namespace Zadanie_1
         }
         #endregion
 
-        public string takeValueName;
+        //public string takeValueName;
 
-        public string TakeValueName
-        {
-            get
-            {
-                return takeValueName;
-            }
-            set
-            {
-                takeValueName = value;
-                OnPropertyChanged(nameof(TakeValueName));
-            }
-        }
+        //public string TakeValueName
+        //{
+        //    get
+        //    {
+        //        return takeValueName;
+        //    }
+        //    set
+        //    {
+        //        takeValueName = value;
+        //        OnPropertyChanged(nameof(TakeValueName));
+        //    }
+        //}
 
-        public string takeValueAge;
+        //public string takeValueAge;
 
-        public string TakeValueAge {
-            get {
-                return takeValueAge;
-            } set {
-                takeValueAge = value;
-                OnPropertyChanged(nameof(TakeValueAge));
-                    }
-        }
+        //public string TakeValueAge {
+        //    get {
+        //        return takeValueAge;
+        //    } set {
+        //        takeValueAge = value;
+        //        OnPropertyChanged(nameof(TakeValueAge));
+        //            }
+        //}
 
         #region Errors
 
@@ -173,11 +162,7 @@ namespace Zadanie_1
 
         #region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+      
 
         #endregion
 
@@ -199,9 +184,14 @@ namespace Zadanie_1
 
         private void ButtonCheckBind_Click(object sender, RoutedEventArgs e)
         {
-
-            TakeValuesFromBinding();
-           
+            TakeValuesFromTextBoxes();
+            DeleteAllRecordsBind();
+            if (Validate())
+            {
+                ShowResultsBind();
+                DeleteAllErrorsBind();
+            }
+            else ShowErrorsBind();
            
         }
         #endregion 
@@ -216,12 +206,6 @@ namespace Zadanie_1
             ageValue = TextBoxYourAge.Text.Trim();
         }
 
-        public void TakeValuesFromBinding()
-        {
-            nameValue = TakeValueName;
-
-            ageValue = TakeValueAge;
-        }
         #endregion
 
 
@@ -233,11 +217,13 @@ namespace Zadanie_1
             ResultingName();
             ResultingAge();
         }
+
         public void ShowResultsBind()
         {
-            ResultingNameBinding();
-            ResultingAgeBinding();
+            ResultingNameBind();
+            ResultingAgeBind();
         }
+        
      
         #endregion
 
@@ -268,6 +254,16 @@ namespace Zadanie_1
         #endregion
 
         #region Validation
+        public bool Validate()
+        {
+            if (CheckName() && CheckAge())
+            {
+
+                return true;
+            }
+            return false;
+
+        }
 
         #region Name
         public bool IsNameValueNull(string nameValue)
@@ -284,7 +280,7 @@ namespace Zadanie_1
 
             }
             else {
-                NameErrors = "";
+                NameErrors = NameError;
                 BlockErrorsName.Text = "";
                 return false; 
             }
@@ -301,16 +297,15 @@ namespace Zadanie_1
                 BlockErrorsName.Text = "";
             }
         }
-        public void ResultingNameBinding()
-        {
 
+        public void ResultingNameBind()
+        {
             if (!IsNameValueNull(nameValue))
             {
                 NameValueProp = "Witaj " + nameValue;
                 NameErrors = "";
             }
         }
-
         #endregion
 
 
@@ -339,7 +334,6 @@ namespace Zadanie_1
         {
             if (ageValue == null)
             {
-
                 return false;
             }
 
@@ -413,12 +407,8 @@ namespace Zadanie_1
             }
         }
 
-
-
-        public void ShowErrorsBinding()
+        public void ShowErrorsBind()
         {
-            
-
             if (!IsNotEmpty())
             {
                 AgeErrors = AgeError;
@@ -434,9 +424,6 @@ namespace Zadanie_1
                 AgeErrors = AgeOutOfRange;
             }
         }
-
-
-
 
 
 
@@ -456,13 +443,12 @@ namespace Zadanie_1
                 BlockOutcomeAgeIsLegal.Text = NotLegalAge;
             }
         }
-
-        public void ResultingAgeBinding()
+        public void ResultingAgeBind()
         {
             if (IsLegalAge())
             {
-                AgeValueProp = "Masz " + ageValue + " lat";
-                LegalAgeProp = LegalAge;
+               AgeValueProp = "Masz " + ageValue + " lat";
+              LegalAgeProp = LegalAge;
             }
             else
             {
@@ -470,7 +456,6 @@ namespace Zadanie_1
                 LegalAgeProp = NotLegalAge;
             }
         }
-
 
 
 
@@ -488,18 +473,13 @@ namespace Zadanie_1
 
         #endregion
 
-        public bool Validate()
-        {
-            if (CheckName() && CheckAge())
-            {
-               
-                return true;
-            } 
-            return false;
-            
-        }
-        #endregion
 
+        #endregion
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
     }
 }

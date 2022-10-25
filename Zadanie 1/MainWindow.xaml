@@ -19,7 +19,7 @@
                 <SolidColorBrush Color="White" Opacity="0.28"/>
             </TextBlock.Background>
         </TextBlock>
-        <TextBox Height="20" Name="TextBoxYourName" Background="#FFC9D3CA" Opacity="0.75" Text="{Binding ElementName=ThisWindow, Path=TakeValueName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Height="20" Name="TextBoxYourName" Background="#FFC9D3CA" Opacity="0.75"/>
 
         
         <!--Age-->
@@ -28,7 +28,7 @@
                 <SolidColorBrush Color="White" Opacity="0.28"/>
             </TextBlock.Background>
         </TextBlock>
-        <TextBox Height="20" Name="TextBoxYourAge"  Background="#FFC9D3CA" Opacity="0.75" Text="{Binding ElementName=ThisWindow, Path=TakeValueAge, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Height="20" Name="TextBoxYourAge"  Background="#FFC9D3CA" Opacity="0.75" />
 
 
         <!--TextBlocks-->
