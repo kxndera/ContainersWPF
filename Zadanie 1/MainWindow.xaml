@@ -19,7 +19,7 @@
                 <SolidColorBrush Color="White" Opacity="0.28"/>
             </TextBlock.Background>
         </TextBlock>
-        <TextBox Height="20" Name="TextBoxYourName" Background="#FFC9D3CA" Opacity="0.75"/>
+        <TextBox Height="20" Name="TextBoxYourName" Background="#FFC9D3CA" Opacity="0.75" Text="{Binding ElementName=ThisWindow, Path=TakeValueName, UpdateSourceTrigger=PropertyChanged}" />
 
         
         <!--Age-->
@@ -28,13 +28,13 @@
                 <SolidColorBrush Color="White" Opacity="0.28"/>
             </TextBlock.Background>
         </TextBlock>
-        <TextBox Height="20" Name="TextBoxYourAge"  Background="#FFC9D3CA" Opacity="0.75"/>
+        <TextBox Height="20" Name="TextBoxYourAge"  Background="#FFC9D3CA" Opacity="0.75" Text="{Binding ElementName=ThisWindow, Path=TakeValueAge, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <!--TextBlocks-->
-        <TextBlock Name="BlockOutcomeName" FontSize="20" Margin="5 10 430 0" Width="221" Foreground="#FF065906" Text="{Binding ElementName=ThisWindow, Path=nameValueProp}" />
-        <TextBlock Name="BlockOutcomeAge"  FontSize="20" Margin="5 10 450 0" Width ="200" Foreground="#FF065906" Text="{Binding ElementName=ThisWindow, Path=ageValueProp}"/>
-        <TextBlock Name="BlockOutcomeAgeIsLegal"  FontSize="20" Margin="5 10 450 0" Width ="206" Foreground="#FF065906" Text="{Binding ElementName=ThisWindow, Path=legalAgeProp}"/>
+        <TextBlock Name="BlockOutcomeName" FontSize="20" Margin="5 10 430 0" Width="221" Foreground="#FF065906" Text="{Binding ElementName=ThisWindow, Path=NameValueProp}" />
+        <TextBlock Name="BlockOutcomeAge"  FontSize="20" Margin="5 10 450 0" Width ="200" Foreground="#FF065906" Text="{Binding ElementName=ThisWindow, Path=AgeValueProp}"/>
+        <TextBlock Name="BlockOutcomeAgeIsLegal"  FontSize="20" Margin="5 10 450 0" Width ="206" Foreground="#FF065906" Text="{Binding ElementName=ThisWindow, Path=LegalAgeProp}"/>
         <TextBlock Name="BlockErrorsName"  FontSize="17" Foreground="Red" Margin="500 0 1 0 " Width="180" Text="{Binding ElementName=ThisWindow, Path=NameErrors}" />
         <TextBlock Name="BlockErrorsAge" FontSize="17" Foreground="Red" Margin="470 0 1 0 "  Text="{Binding ElementName=ThisWindow, Path=AgeErrors}"/>
         

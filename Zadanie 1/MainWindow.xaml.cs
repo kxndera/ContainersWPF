@@ -44,7 +44,7 @@ namespace Zadanie_1
         #region Binding
 
         public string nameValueString;
-        public string nameValueProp
+        public string NameValueProp
         {
             get
             {
@@ -52,13 +52,13 @@ namespace Zadanie_1
             }
             set
             {
-                nameValueString = nameValue;
-
+                nameValueString = value;
+                OnPropertyChanged(nameof(NameValueProp));
             }
         }
 
         public string ageValueString;
-        public string ageValueProp
+        public string AgeValueProp
         {
             get
             {
@@ -66,7 +66,8 @@ namespace Zadanie_1
             }
             set
             {
-                ageValueString = ageValue;
+                ageValueString = value;
+                OnPropertyChanged(nameof(AgeValueProp));
             }
         }
 
@@ -85,7 +86,7 @@ namespace Zadanie_1
         }
 
         public string legalAgeString;
-        public string legalAgeProp
+        public string LegalAgeProp
         {
             get
             {
@@ -95,7 +96,7 @@ namespace Zadanie_1
             set
             {
                 legalAgeString = value;
-                OnPropertyChanged(nameof(legalAgeProp));
+                OnPropertyChanged(nameof(LegalAgeProp));
             }
         }
 
@@ -131,6 +132,31 @@ namespace Zadanie_1
         }
         #endregion
 
+        public string takeValueName;
+
+        public string TakeValueName
+        {
+            get
+            {
+                return takeValueName;
+            }
+            set
+            {
+                takeValueName = value;
+                OnPropertyChanged(nameof(TakeValueName));
+            }
+        }
+
+        public string takeValueAge;
+
+        public string TakeValueAge {
+            get {
+                return takeValueAge;
+            } set {
+                takeValueAge = value;
+                OnPropertyChanged(nameof(TakeValueAge));
+                    }
+        }
 
         #region Errors
 
@@ -165,6 +191,7 @@ namespace Zadanie_1
             if (Validate())
             {
                 ShowResults();
+                DeleteAllErrors();
             }
             else ShowErrors();
 
@@ -173,17 +200,9 @@ namespace Zadanie_1
         private void ButtonCheckBind_Click(object sender, RoutedEventArgs e)
         {
 
-            TakeValuesFromTextBoxes();
-            DeleteAllRecords();
-            if (Validate())
-            {
-                ShowResultBind();
-            }
-            else ShowErrorsBinding();
-
-
-
-
+            TakeValuesFromBinding();
+           
+           
         }
         #endregion 
 
@@ -196,6 +215,13 @@ namespace Zadanie_1
 
             ageValue = TextBoxYourAge.Text.Trim();
         }
+
+        public void TakeValuesFromBinding()
+        {
+            nameValue = TakeValueName;
+
+            ageValue = TakeValueAge;
+        }
         #endregion
 
 
@@ -207,37 +233,61 @@ namespace Zadanie_1
             ResultingName();
             ResultingAge();
         }
-        public void ShowResultBind()
+        public void ShowResultsBind()
         {
-
             ResultingNameBinding();
             ResultingAgeBinding();
         }
+     
         #endregion
 
 
-
-       public void DeleteAllRecords()
+        #region deleting
+        public void DeleteAllRecords()
         {
             BlockOutcomeName.Text = "";
             BlockOutcomeAge.Text = "";
             BlockOutcomeAgeIsLegal.Text = "";
         }
-
-
+        public void DeleteAllRecordsBind()
+        {
+           NameValueProp = "";
+           AgeValueProp= "";
+          LegalAgeProp = "";
+        }
+        public void DeleteAllErrors()
+        {
+            BlockErrorsName.Text = "";
+            BlockErrorsAge.Text = "";
+        }
+        public void DeleteAllErrorsBind()
+        {
+            NameErrors = "";
+            AgeErrors= "";
+        }
+        #endregion
 
         #region Validation
 
         #region Name
-        public bool IsNameValueNull()
+        public bool IsNameValueNull(string nameValue)
         {
+            if (nameValue == null) {
+                
+                return true; 
+            }
             if (nameValue.Length == 0)
             {
+                NameErrors = NameError;
                 BlockErrorsName.Text = NameError;
                 return true;
 
             }
-            else return false;
+            else {
+                NameErrors = "";
+                BlockErrorsName.Text = "";
+                return false; 
+            }
 
         }
 
@@ -245,44 +295,35 @@ namespace Zadanie_1
         #region Resulting Name
         public void ResultingName()
         {
-            if (IsNameValueNull())
-            {
-                BlockErrorsName.Text = NameError;
-                BlockOutcomeName.Text = "";
-            }
-            else if (!IsNameValueNull())
+             if (!IsNameValueNull(nameValue))
             {
                 BlockOutcomeName.Text = "Witaj " + nameValue;
                 BlockErrorsName.Text = "";
             }
         }
-
         public void ResultingNameBinding()
         {
-            if (IsNameValueNull())
+
+            if (!IsNameValueNull(nameValue))
             {
-               NameErrors = NameError;
-                Outcome = "";
-            }
-            else if (!IsNameValueNull())
-            {
-                Outcome = "Witaj " + nameValue;
+                NameValueProp = "Witaj " + nameValue;
                 NameErrors = "";
             }
         }
+
         #endregion
 
 
-        
-       
+
+
 
         public bool CheckName()
         {
-            if (!IsNameValueNull())
+            if (IsNameValueNull(nameValue))
             {
-                return true;
+                return false;
             }
-            else return false;
+            else return true;
 
         }
 
@@ -296,11 +337,20 @@ namespace Zadanie_1
 
         public bool IsNotEmpty()
         {
+            if (ageValue == null)
+            {
+
+                return false;
+            }
+
             if (ageValue.Length == 0)
             {
                 return false;
             }
-            else return true;
+            else {
+
+                return true;
+            }
         }
 
 
@@ -310,7 +360,7 @@ namespace Zadanie_1
             {
                 return true;
             }
-
+            
             return false;
 
         }
@@ -364,8 +414,11 @@ namespace Zadanie_1
         }
 
 
+
         public void ShowErrorsBinding()
         {
+            
+
             if (!IsNotEmpty())
             {
                 AgeErrors = AgeError;
@@ -381,6 +434,10 @@ namespace Zadanie_1
                 AgeErrors = AgeOutOfRange;
             }
         }
+
+
+
+
 
 
         #endregion
@@ -400,32 +457,29 @@ namespace Zadanie_1
             }
         }
 
-
-
-
         public void ResultingAgeBinding()
         {
             if (IsLegalAge())
             {
-                Outcome = "Masz " + ageValue + " lat";
-                legalAgeProp = LegalAge;
+                AgeValueProp = "Masz " + ageValue + " lat";
+                LegalAgeProp = LegalAge;
             }
             else
             {
-                Outcome = "Masz " + ageValue + " lat";
-                legalAgeProp = NotLegalAge;
+                AgeValueProp = "Masz " + ageValue + " lat";
+                LegalAgeProp = NotLegalAge;
             }
         }
+
+
+
 
         #endregion
 
         public bool CheckAge()
         {
-
-
             if (IsNotEmpty() && IsAgeANumber(ageValue) && IsAgeWithinRange())
             {
-                BlockErrorsAge.Text = "";
                 return true;
             }
             else return false;
@@ -438,7 +492,7 @@ namespace Zadanie_1
         {
             if (CheckName() && CheckAge())
             {
-                ShowResults();
+               
                 return true;
             } 
             return false;
