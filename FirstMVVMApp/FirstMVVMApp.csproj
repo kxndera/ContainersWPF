@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Gragas_2.jpg" />
+    <None Remove="nerd-final-fantasy-vii.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Gragas_2.jpg" />
+    <Resource Include="nerd-final-fantasy-vii.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UtilitiesWPF\UtilitiesWPF.csproj" />
+  </ItemGroup>
+
+</Project>

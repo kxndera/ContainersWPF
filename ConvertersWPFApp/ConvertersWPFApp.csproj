@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="IMG_20221103_131238.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UtilitiesWPF\UtilitiesWPF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="IMG_20221103_131238.jpg" />
+  </ItemGroup>
+
+</Project>

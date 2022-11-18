@@ -1,0 +1,21 @@
+﻿<Window x:Class="FirstMVVMApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FirstMVVMApp" xmlns:viewmodel="clr-namespace:FirstMVVMApp.ViewModel"
+        mc:Ignorable="d"
+        Title="DragonForce - Through The Fire And Flames" Height="314" Width="656">
+    <Window.DataContext>
+        <viewmodel:ActionVM/>
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel.Background>
+            <ImageBrush ImageSource="/Gragas_2.jpg"/>
+        </StackPanel.Background>
+        <TextBlock Text="Podaj liczbę:" Foreground="White"/>
+        <TextBox Width="300" Text="{Binding NumberProp}"/>
+        <Button Content="Oblicz" Width="200" Command="{Binding CommandCalculate}"/>
+        <TextBlock Text="Wynik:" Foreground="White"/>
+    </StackPanel>
+</Window>
