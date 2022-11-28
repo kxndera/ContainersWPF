@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConvertersWPFApp", "Convert
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SliderRGB", "SliderRGB\SliderRGB.csproj", "{8D0A2700-5F22-4A2B-9150-1077F5E57FFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorWPFApp", "CalculatorWPFApp\CalculatorWPFApp.csproj", "{06ABE90C-3916-427F-988B-618D726FC84F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{8D0A2700-5F22-4A2B-9150-1077F5E57FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D0A2700-5F22-4A2B-9150-1077F5E57FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D0A2700-5F22-4A2B-9150-1077F5E57FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06ABE90C-3916-427F-988B-618D726FC84F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06ABE90C-3916-427F-988B-618D726FC84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06ABE90C-3916-427F-988B-618D726FC84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06ABE90C-3916-427F-988B-618D726FC84F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{FF162EA9-B47B-4F95-A3C5-233C05D6212C} = {B77BFC62-D40D-4C85-BDAD-5E7BC2D7AECC}
 		{5BF61052-7F78-4C06-974A-6E997A42E70A} = {B77BFC62-D40D-4C85-BDAD-5E7BC2D7AECC}
 		{8D0A2700-5F22-4A2B-9150-1077F5E57FFF} = {B77BFC62-D40D-4C85-BDAD-5E7BC2D7AECC}
+		{06ABE90C-3916-427F-988B-618D726FC84F} = {B77BFC62-D40D-4C85-BDAD-5E7BC2D7AECC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C9A9C39-8E08-4E81-891C-5C8B6BCC3F88}

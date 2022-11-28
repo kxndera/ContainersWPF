@@ -13,11 +13,12 @@
     </Window.DataContext>
     <Window.Resources>
         <converters:RGBComponentsToColorConverter x:Key="RGBComponentsToColorConverter"/>
+        <converters:HexStringToRgbComponentConverter x:Key="HexStringToRgbComponentConverter"/>
     </Window.Resources>
     <StackPanel>
         <WrapPanel>
             <TextBlock FontSize="20" FontWeight="Bold" Text="Red" Foreground="Red" Width="100"/>
-            <Slider Height="40" Width="400" Minimum="0" Maximum="255" TickFrequency="10" 
+            <Slider Height="40" Width="200" Minimum="0" Maximum="255" TickFrequency="1" 
                     TickPlacement="BottomRight"
                     IsSnapToTickEnabled="True"
                     Value="{Binding RedComponent}"/>
@@ -26,7 +27,7 @@
         
         <WrapPanel>
             <TextBlock FontSize="20" FontWeight="Bold" Text="Green" Foreground="Green" Width="100"/>
-            <Slider Height="40" Width="400" Minimum="0" Maximum="255" TickFrequency="10" 
+            <Slider Height="40" Width="200" Minimum="0" Maximum="255" TickFrequency="1" 
                     TickPlacement="BottomRight"
                     IsSnapToTickEnabled="True"
                     Value="{Binding GreenComponent}"/>
@@ -35,14 +36,23 @@
         
         <WrapPanel>
             <TextBlock FontSize="20" FontWeight="Bold" Text="Blue" Foreground="Blue" Width="100"/>
-            <Slider Height="40" Width="400" Minimum="0" Maximum="255" TickFrequency="10"
+            <Slider Height="40" Width="200" Minimum="0" Maximum="255" TickFrequency="1"
                     TickPlacement="BottomRight"
                     IsSnapToTickEnabled="True"
                     Value="{Binding BlueComponent}" />
             <TextBlock Text="{Binding BlueComponent}" FontSize="20"/>
         </WrapPanel>
 
-        <Button Content="Ustaw Kolor Czerwony" Command="{Binding SetRedColorCommand}"/>
+        <Button Content="Ustaw Kolor Czerwony" Command="{Binding SetRedColorCommand}">
+            <Button.Background>
+                <MultiBinding Converter="{StaticResource RGBComponentsToColorConverter}">
+                    <Binding Path="RedComponent"/>
+                    <Binding Path="GreenComponent"/>
+                    <Binding Path="BlueComponent"/>
+                </MultiBinding>
+            </Button.Background>
+
+        </Button>
         <Rectangle Width="100" Height="100">
             <Rectangle.Fill>
                 <MultiBinding Converter="{StaticResource RGBComponentsToColorConverter}">
@@ -54,7 +64,7 @@
         </Rectangle>
         <TextBox>
             <TextBox.Text>
-                <MultiBinding Converter="{StaticResource}">
+                <MultiBinding Converter="{StaticResource HexStringToRgbComponentConverter}" UpdateSourceTrigger="PropertyChanged">
                     <Binding Path="RedComponent"/>
                     <Binding Path="GreenComponent"/>
                     <Binding Path="BlueComponent"/>

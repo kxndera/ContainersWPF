@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="duolingo-2019-01-02.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UtilitiesWPF\UtilitiesWPF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="duolingo-2019-01-02.png" />
+  </ItemGroup>
+
+</Project>

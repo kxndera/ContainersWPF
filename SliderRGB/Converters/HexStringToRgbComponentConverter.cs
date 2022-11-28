@@ -11,7 +11,7 @@ namespace SliderRGB.Converters
     class HexStringToRgbComponentConverter : IMultiValueConverter
     {
         private string[] byteToHexTable = { "0", "1", "2", "3", "4", "5", "6", "7",
-            "8", "A", "B", "C", "D", "E", "F" };
+            "8","9" , "A", "B", "C", "D", "E", "F" };
 
         private Dictionary<string,double> hexToDoubleDictionary = new Dictionary<string, double>()
         {
@@ -36,13 +36,18 @@ namespace SliderRGB.Converters
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-           if(value == null)
-                return new object[] {Binding.DoNothing, Binding.DoNothing, Binding.DoNothing};
+            if (value == null)
+                return new object[] { Binding.DoNothing, Binding.DoNothing, Binding.DoNothing };
 
             string hexStr = value.ToString().ToUpper().Trim();
 
             if (hexStr.Length != 6) return new object[] { Binding.DoNothing, Binding.DoNothing, Binding.DoNothing };
 
+            double red = hexToDoubleDictionary[hexStr[0].ToString()] * 16 + hexToDoubleDictionary[hexStr[1].ToString()] ;
+            double green = hexToDoubleDictionary[hexStr[2].ToString()] * 16 + hexToDoubleDictionary[hexStr[3].ToString()] ;
+            double blue = hexToDoubleDictionary[hexStr[4].ToString()] * 16 + hexToDoubleDictionary[hexStr[5].ToString()] ;
+
+            return new object[]{red, green, blue};
         }
     }
 }
