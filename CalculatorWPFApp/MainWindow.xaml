@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculatorWPFApp"
-     xmlns:viewmodels="clr-namespace:CalculatorWPFApp.ViewModel" 
-       d:DataContext="{d:DesignInstance Type=viewmodels:CalculatorWPF}"
-       
+     xmlns:viewmodels="clr-namespace:CalculatorWPFApp.ViewModel" xmlns:viewmodels1="clr-namespace:CalculatorWPF.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:CalculatorWPF}"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Kalkulator" Height="500" Width="750" Background="White" Icon="/duolingo-2019-01-02.png">
     <Window.Resources>
@@ -42,7 +42,7 @@
         
     </Window.Resources>
     <Window.DataContext>
-        <viewmodels:CalculatorOnpVM/>
+        <viewmodels1:CalculatorOnpVM/>
     </Window.DataContext>
     <Grid Background="GhostWhite">
         <Grid.ColumnDefinitions>
@@ -168,11 +168,17 @@
                 Command="{Binding ClearCommand}"
                 Style="{StaticResource ClearButtonStyle}"/>
         <Button Content="="
-                Grid.ColumnSpan="2"
+                Grid.ColumnSpan="1"
                 Grid.Column="3"
                 Grid.Row="4"
                 Command="{Binding EqualCommand}"
                 Style="{StaticResource arithmeticOperationsButton}"/>
+        <Button Content="B"
+                Grid.ColumnSpan="1"
+                Grid.Column="5"
+                Grid.Row="4"
+                Command="{Binding BackCommand}"
+                Style="{StaticResource ClearButtonStyle}"/>
     </Grid>
     
     
