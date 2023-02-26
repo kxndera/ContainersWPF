@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:todolist="clr-namespace:ToDoList.ViewModel"
+             x:Class="ToDoList.MainPage"
+             x:Name="thisPage">
+
+    <ContentPage.BindingContext>
+        <todolist:ViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout BackgroundColor="#FCF8E8">
+        <Label Text="Nowe zadanie: " 
+               TextColor="#7C9473" 
+               FontSize="17"
+               HorizontalTextAlignment="Center"
+               />
+        <Entry TextColor="Black"
+               Placeholder="bruh"
+               PlaceholderColor="Black"
+               BackgroundColor="White"
+            />
+        <Button HorizontalOptions="Center" 
+                BackgroundColor="#E7DEC8"
+                Text="Dodaj zadanie" 
+                TextColor="#7C9473"
+                Command="{Binding AddNewTask}"
+            />
+
+        <Label Text="Lista do zrobienia"
+               TextColor="#7C9473" 
+               FontSize="20"
+               FontAttributes="Bold" 
+               HorizontalTextAlignment="Center"
+            />
+      
+        <ListView ItemsSource="{Binding CollectionOfTasks}" HasUnevenRows="True"
+                  SelectedItem="{Binding SelectedTask}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="Nazwa zadania:"/>
+                            <Label Text="{Binding NewTaskName}" BackgroundColor="#FCF8E8"/>
+                            <RadioButton Content="Do zrobienia" TextColor="#7C9473" BackgroundColor="White"/>
+                            <RadioButton Content="Zrobione" TextColor="#7C9473" BackgroundColor="White"/>
+                            <Button Text="Usuń" Command="{Binding Source={x:Reference thisPage}, 
+                                Path=BindingContext.DeleteTask}"
+                                    CommandParameter="{Binding}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView ItemsSource="{Binding CollectionOfDeletedTasks}" HasUnevenRows="True"
+               >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="Nazwa usuniętego zadania:"/>
+                            <Label Text="{Binding NameOfTask}" BackgroundColor="#FCF8E8"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+        </ListView>
+        
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,36 @@
+﻿<Window x:Class="ClockWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClockWpfApp" xmlns:viewmodels="clr-namespace:ClockWpfApp.ViewModels"
+        mc:Ignorable="d"
+        Title="Cock" Height="450" Width="800">
+
+   
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="*"/>
+            <ColumnDefinition Width ="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
+            <StackPanel.DataContext>
+                <viewmodels:CurrentTimeVM/>
+            </StackPanel.DataContext>
+            <TextBlock Text="Aktualna godzina:"/>
+        <TextBlock Text="{Binding CurrentTime}" FontSize="65" HorizontalAlignment="Center"/>
+        <Button Content="Odśwież godzinę" Margin="10 0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1 ">
+            <StackPanel.DataContext>
+                <viewmodels:StopwatchVM/>
+            </StackPanel.DataContext>
+        <TextBlock Text="Czas Stopera:"/>
+        <TextBlock FontSize="60" TextAlignment="Center" Text="{Binding TimeStorage}"/>
+        <Button Content="Start" Margin=" 0 10" Command="{Binding StartCommand}"/>
+        <Button Content="Stop" Margin=" 0 10" Command="{Binding StopCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

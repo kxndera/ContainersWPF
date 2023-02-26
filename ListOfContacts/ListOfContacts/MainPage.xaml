@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:listofcontactsapp="clr-namespace:ListOfContacts"
+             x:Class="ListOfContacts.MainPage"
+             x:Name="thisPage">
+
+    <ContentPage.BindingContext>
+        <listofcontactsapp:MainViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Label Text="SMS"/>
+        <Editor AutoSize="TextChanges"
+                Placeholder="Treść SMS"
+                Text="{Binding SmsText}"/>
+        <Button Text="Wyślij SMS"
+                Command="{Binding SendSmsCommand}"/>
+
+
+        <Label Text="Lista kontaktów:"
+             FontSize="20"
+             TextColor="White"
+             BackgroundColor="ForestGreen"/>
+        <ListView ItemsSource="{Binding CollectionOfContacts}" HasUnevenRows="True"
+                  SelectedItem="{Binding SelectedContact}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="Nazwa"/>
+                            <Label Text="{Binding GivenName}"/>
+                            <Label Text="{Binding FamilyName}"/>
+                            <Label Text="Telefon"/>
+                            <Label Text="{Binding Phones[0].PhoneNumber}"/>
+                            <Button Text="Zadzwoń" Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.PhoneCallCommand}"
+                                    CommandParameter="{Binding}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

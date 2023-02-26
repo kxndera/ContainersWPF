@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NavigationPageApp.MainPage">
+
+    <StackLayout>
+        <Label Text="Strona główna"
+             FontSize="20"
+             VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+               />
+        <Button Text="do strony 2" Clicked="Button_Clicked"/>
+    </StackLayout>
+
+</ContentPage>

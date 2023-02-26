@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:mytaskapp="clr-namespace:MyTaskApp"
+             x:Class="MyTaskApp.MainPage">
+    <ContentPage.BindingContext>
+        <mytaskapp:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Image Source="kitty.jpg"/>
+        <Label Text="Latarka" HorizontalOptions="Center"/>
+        <Button Text="Włącz" HorizontalOptions="Center" Command="{Binding SetOnCommand}"/>
+        <Button Text="Wyłącz" HorizontalOptions="Center" Command="{Binding SetOffCommand}"/>
+
+        <Button Text="Lokalizacja" HorizontalOptions="Center" Command="{Binding Location}"/>
+        <Label Text="Długość:"/>
+        <Label Text="{Binding Latitude}"/>
+        <Label Text="Szerokość:"/>
+        <Label Text="{Binding Longitude}"/>
+        <Label Text="Wysokość:"/>
+        <Label Text="{Binding Altitude}"/>
+
+        <Button Text="voice" Command="{Binding TTS}" HorizontalOptions="Center"/>
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            xmlns:android ="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:tabbedpageapp="clr-namespace:TabbedPageApp"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            x:Class="TabbedPageApp.MainPage">
+    <tabbedpageapp:AboutPage
+        IconImageSource="icon1.png"/>
+    
+    <tabbedpageapp:HistoryPage
+         IconImageSource="icon2.png"/>
+
+</TabbedPage>

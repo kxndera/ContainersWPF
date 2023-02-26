@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabbedPageApp.AboutPage">
+    <ContentPage.Content>
+
+        <StackLayout BackgroundColor="#FEF5ED" >
+            <Label Text="Welcome to About Page!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                   TextColor="ForestGreen"
+                   />
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

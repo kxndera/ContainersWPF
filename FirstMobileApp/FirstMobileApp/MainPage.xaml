@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstMobileApp.MainPage">
+
+    <StackLayout BindingContext="{x:Reference rotationSlider}">
+        <Label Text="{Binding Value, StringFormat='Tekst jest obrócony o {0:N0} stopni Fahreinheita'}" 
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand"/>
+        <Slider Maximum="360"
+                x:Name="rotationSlider"/>
+        <Label Text="Tekst"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+               Rotation="{Binding Source={x:Reference rotationSlider}, Path=Value}"/>
+    </StackLayout>
+
+</ContentPage>

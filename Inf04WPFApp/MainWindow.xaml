@@ -1,0 +1,59 @@
+﻿<Window x:Class="Inf04WPFApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Inf04WPFApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Column="0"
+                  Grid.Row="0"
+                  Header="Dane">
+            <StackPanel>
+                <TextBlock Text="Imię:"/>
+                <TextBox x:Name="TextBoxName"/>
+                <TextBlock Text="Nazwisko:"/>
+                <TextBox x:Name="TextBoxSurname"/>
+                <TextBlock Text="Stanowisko:"/>
+                <ComboBox x:Name="ComboBoxJobsPosition">
+                    <ComboBoxItem>Programista</ComboBoxItem>
+                    <ComboBoxItem>Tester</ComboBoxItem>
+                    <ComboBoxItem>Piekarz</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1"
+                  Grid.Row="0"
+                 Header="Hasło" >
+            <StackPanel>
+                <TextBlock Text="Ilość liter w haśle:"/>
+                <TextBox Name="TextBoxPasswordLength"/>
+                <CheckBox Content="Duże litery" x:Name="CheckBoxContainsUppercase"/>
+                <CheckBox Content="Cyfry" x:Name="CheckBoxContainsDigits"/>
+                <CheckBox Content="Znaki specjalne" x:Name="CheckBoxContainsSpecialCharacters"/>
+                <Button Content="Generuj" x:Name="ButtonGeneratePassword" Click="ButtonGeneratePassword_Click"></Button>
+                
+            </StackPanel>
+            
+        </GroupBox>
+
+        <Button Grid.Column="0"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Content="Zatwierdź"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+           
+        </Button>
+    </Grid>
+</Window>
