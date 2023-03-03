@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
+
+
 namespace Zadanie_1
 {
 
@@ -28,20 +30,15 @@ namespace Zadanie_1
     {
         public MainWindow()
         {
-
             InitializeComponent();
-
-
         }
 
-        #region without Binding
+        #region Strings without Binding
         public string nameValue;
         public string ageValue;
         #endregion
 
-
-
-        #region Binding
+        #region Strings Binding
 
         public string nameValueString;
         public string NameValueProp
@@ -71,19 +68,6 @@ namespace Zadanie_1
             }
         }
 
-        public string OutcomeString;
-        public string Outcome
-        {
-            get
-            {
-                return OutcomeString;
-            }
-            set
-            {
-                OutcomeString = value;
-                OnPropertyChanged(nameof(Outcome));
-            }
-        }
 
         public string legalAgeString;
         public string LegalAgeProp
@@ -132,32 +116,6 @@ namespace Zadanie_1
         }
         #endregion
 
-        public string takeValueName;
-
-        public string TakeValueName
-        {
-            get
-            {
-                return takeValueName;
-            }
-            set
-            {
-                takeValueName = value;
-                OnPropertyChanged(nameof(TakeValueName));
-            }
-        }
-
-        public string takeValueAge;
-
-        public string TakeValueAge {
-            get {
-                return takeValueAge;
-            } set {
-                takeValueAge = value;
-                OnPropertyChanged(nameof(TakeValueAge));
-                    }
-        }
-
         #region Errors
 
         public string NameError = "Brak podanego imienia";
@@ -168,22 +126,6 @@ namespace Zadanie_1
         public string LegalAge = "jesteś pełnoletni/a";
         public string NotLegalAge = "jesteś niepełnoletni/a";
         #endregion
-
-
-
-        #region INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
-
-
-        #region Buttons
         private void ButtonCheck_Click(object sender, RoutedEventArgs e)
         {
             TakeValuesFromTextBoxes();
@@ -194,19 +136,31 @@ namespace Zadanie_1
                 DeleteAllErrors();
             }
             else ShowErrors();
-
+            
         }
 
         private void ButtonCheckBind_Click(object sender, RoutedEventArgs e)
         {
-
-            TakeValuesFromBinding();
-           
+            TakeValuesFromTextBoxes();
+            DeleteAllRecordsBind();
+            if (Validate())
+            {
+                ShowResultsBind();
+                DeleteAllErrorsBind();
+            }
+            else ShowErrorsBind();
            
         }
-        #endregion 
+        public bool Validate()
+        {
+            if (CheckName() && CheckAge())
+            {
 
+                return true;
+            }
+            return false;
 
+        }
 
         #region Take Values from both Textboxes
         public void TakeValuesFromTextBoxes()
@@ -215,16 +169,7 @@ namespace Zadanie_1
 
             ageValue = TextBoxYourAge.Text.Trim();
         }
-
-        public void TakeValuesFromBinding()
-        {
-            nameValue = TakeValueName;
-
-            ageValue = TakeValueAge;
-        }
         #endregion
-
-
 
         #region Show Results
 
@@ -233,16 +178,66 @@ namespace Zadanie_1
             ResultingName();
             ResultingAge();
         }
+
         public void ShowResultsBind()
         {
-            ResultingNameBinding();
-            ResultingAgeBinding();
+            ResultingNameBind();
+            ResultingAgeBind();
         }
-     
         #endregion
 
+        #region Results Age
+        public void ResultingAge()
+        {
+            if (IsLegalAge())
+            {
+                BlockOutcomeAge.Text = "Masz " + ageValue + " lat";
+                BlockOutcomeAgeIsLegal.Text = LegalAge;
+            }
+            else
+            {
+                BlockOutcomeAge.Text = "Masz " + ageValue + " lat";
+                BlockOutcomeAgeIsLegal.Text = NotLegalAge;
+            }
+        }
+        public void ResultingAgeBind()
+        {
+            if (IsLegalAge())
+            {
+                AgeValueProp = "Masz " + ageValue + " lat";
+                LegalAgeProp = LegalAge;
+            }
+            else
+            {
+                AgeValueProp = "Masz " + ageValue + " lat";
+                LegalAgeProp = NotLegalAge;
+            }
+        }
 
-        #region deleting
+
+
+        #endregion
+
+        #region Resulting Name
+        public void ResultingName()
+        {
+            if (!IsNameValueNull(nameValue))
+            {
+                BlockOutcomeName.Text = "Witaj " + nameValue;
+                BlockErrorsName.Text = "";
+            }
+        }
+        public void ResultingNameBind()
+        {
+            if (!IsNameValueNull(nameValue))
+            {
+                NameValueProp = "Witaj " + nameValue;
+                NameErrors = "";
+            }
+        }
+        #endregion
+
+        #region deleting Records & Errors
         public void DeleteAllRecords()
         {
             BlockOutcomeName.Text = "";
@@ -267,79 +262,52 @@ namespace Zadanie_1
         }
         #endregion
 
-        #region Validation
-
-        #region Name
-        public bool IsNameValueNull(string nameValue)
+        #region Showing Errors
+        public void ShowErrors()
         {
-            if (nameValue == null) {
-                
-                return true; 
-            }
-            if (nameValue.Length == 0)
+            if (!IsNotEmpty())
             {
-                NameErrors = NameError;
-                BlockErrorsName.Text = NameError;
-                return true;
-
-            }
-            else {
-                NameErrors = "";
-                BlockErrorsName.Text = "";
-                return false; 
+                BlockErrorsAge.Text = AgeError;
             }
 
-        }
-
-
-        #region Resulting Name
-        public void ResultingName()
-        {
-             if (!IsNameValueNull(nameValue))
+            else if (!IsAgeANumber(ageValue))
             {
-                BlockOutcomeName.Text = "Witaj " + nameValue;
-                BlockErrorsName.Text = "";
+                BlockErrorsAge.Text = AgeIsNotADigit;
             }
-        }
-        public void ResultingNameBinding()
-        {
 
-            if (!IsNameValueNull(nameValue))
+            else if (!IsAgeWithinRange())
             {
-                NameValueProp = "Witaj " + nameValue;
-                NameErrors = "";
+                BlockErrorsAge.Text = AgeOutOfRange;
             }
         }
 
-        #endregion
-
-
-
-
-
-        public bool CheckName()
+        public void ShowErrorsBind()
         {
-            if (IsNameValueNull(nameValue))
+            if (!IsNotEmpty())
             {
-                return false;
+                AgeErrors = AgeError;
             }
-            else return true;
 
+            else if (!IsAgeANumber(ageValue))
+            {
+                AgeErrors = AgeIsNotADigit;
+            }
+
+            else if (!IsAgeWithinRange())
+            {
+                AgeErrors = AgeOutOfRange;
+            }
         }
+
 
 
         #endregion
-
 
         #region Age
-
-
-
         public bool IsNotEmpty()
         {
             if (ageValue == null)
             {
-
                 return false;
             }
 
@@ -352,7 +320,6 @@ namespace Zadanie_1
                 return true;
             }
         }
-
 
         public bool IsAgeANumber(string ageValue)
         {
@@ -378,8 +345,6 @@ namespace Zadanie_1
             return false;
         }
 
-
-
         public bool IsLegalAge()
         {
             int intAgeValue = int.Parse(ageValue);
@@ -393,89 +358,6 @@ namespace Zadanie_1
 
         }
 
-
-        #region Showing Errors
-        public void ShowErrors()
-        {
-            if (!IsNotEmpty())
-            {
-                BlockErrorsAge.Text = AgeError;
-            }
-
-            else if (!IsAgeANumber(ageValue))
-            {
-                BlockErrorsAge.Text = AgeIsNotADigit;
-            }
-
-            else if (!IsAgeWithinRange())
-            {
-                BlockErrorsAge.Text = AgeOutOfRange;
-            }
-        }
-
-
-
-        public void ShowErrorsBinding()
-        {
-            
-
-            if (!IsNotEmpty())
-            {
-                AgeErrors = AgeError;
-            }
-
-            else if (!IsAgeANumber(ageValue))
-            {
-                AgeErrors = AgeIsNotADigit;
-            }
-
-            else if (!IsAgeWithinRange())
-            {
-                AgeErrors = AgeOutOfRange;
-            }
-        }
-
-
-
-
-
-
-        #endregion
-
-        #region Results
-        public void ResultingAge()
-        {
-            if (IsLegalAge())
-            {
-                BlockOutcomeAge.Text = "Masz " + ageValue + " lat";
-                BlockOutcomeAgeIsLegal.Text = LegalAge;
-            }
-            else
-            {
-                BlockOutcomeAge.Text = "Masz " + ageValue + " lat";
-                BlockOutcomeAgeIsLegal.Text = NotLegalAge;
-            }
-        }
-
-        public void ResultingAgeBinding()
-        {
-            if (IsLegalAge())
-            {
-                AgeValueProp = "Masz " + ageValue + " lat";
-                LegalAgeProp = LegalAge;
-            }
-            else
-            {
-                AgeValueProp = "Masz " + ageValue + " lat";
-                LegalAgeProp = NotLegalAge;
-            }
-        }
-
-
-
-
-        #endregion
-
         public bool CheckAge()
         {
             if (IsNotEmpty() && IsAgeANumber(ageValue) && IsAgeWithinRange())
@@ -488,22 +370,48 @@ namespace Zadanie_1
 
         #endregion
 
-        public bool Validate()
+        #region Name
+        public bool IsNameValueNull(string nameValue)
         {
-            if (CheckName() && CheckAge())
+            if (nameValue == null)
             {
-               
+
                 return true;
-            } 
-            return false;
-            
+            }
+            if (nameValue.Length == 0)
+            {
+                NameErrors = NameError;
+                BlockErrorsName.Text = NameError;
+                return true;
+
+            }
+            else
+            {
+                NameErrors = NameError;
+                BlockErrorsName.Text = "";
+                return false;
+            }
+
+        }
+
+        public bool CheckName()
+        {
+            if (IsNameValueNull(nameValue))
+            {
+                return false;
+            }
+            else return true;
+
         }
         #endregion
 
-
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }
-
-
-
 

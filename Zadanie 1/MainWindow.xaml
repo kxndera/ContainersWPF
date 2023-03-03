@@ -19,7 +19,7 @@
                 <SolidColorBrush Color="White" Opacity="0.28"/>
             </TextBlock.Background>
         </TextBlock>
-        <TextBox Height="20" Name="TextBoxYourName" Background="#FFC9D3CA" Opacity="0.75" Text="{Binding ElementName=ThisWindow, Path=TakeValueName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Height="20" Name="TextBoxYourName" Background="#FFC9D3CA" Opacity="0.75"/>
 
         
         <!--Age-->
@@ -28,7 +28,7 @@
                 <SolidColorBrush Color="White" Opacity="0.28"/>
             </TextBlock.Background>
         </TextBlock>
-        <TextBox Height="20" Name="TextBoxYourAge"  Background="#FFC9D3CA" Opacity="0.75" Text="{Binding ElementName=ThisWindow, Path=TakeValueAge, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Height="20" Name="TextBoxYourAge"  Background="#FFC9D3CA" Opacity="0.75" />
 
 
         <!--TextBlocks-->
@@ -40,7 +40,7 @@
         
         <!--Button-->
         <Button Content="Sprawdź" x:Name="ButtonCheck" Click="ButtonCheck_Click" Margin="0 70 0 0" Width="200" Background="#FF5C5543" Foreground="white"/>
-        <Button Content="Sprawdź" Name="ButtonCheckBind" Click="ButtonCheckBind_Click" Margin="0 5 0 0 " Width="200"  Background="#FF4B6410" Foreground="white"/>
+        <Button Content="Sprawdź bindowaniem" Name="ButtonCheckBind" Click="ButtonCheckBind_Click" Margin="0 5 0 0 " Width="200"  Background="#FF4B6410" Foreground="white"/>
        
     </StackPanel>
 </Window>
