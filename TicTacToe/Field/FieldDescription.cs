@@ -27,6 +27,7 @@ namespace TicTacToeqdsqdw.Field
         public int RowIndex { get; set; }
             public int ColIndex { get; set; }
             public ICommand Command { get; set; }
+
         
     }
 }
