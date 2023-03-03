@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using ToDoList.Task;
 using Xamarin.Forms;
+using System.Collections.Specialized;
 
 namespace ToDoList.ViewModel
 {
@@ -13,9 +14,6 @@ namespace ToDoList.ViewModel
         public ObservableCollection<TaskName> CollectionOfTasks { get; set; }
         public ObservableCollection<TaskName> CollectionOfDeletedTasks { get; set; }
 
-
-
-
         private string newTaskName;
         public string NewTaskName
         {
@@ -23,20 +21,23 @@ namespace ToDoList.ViewModel
             set
             {
                 newTaskName = value;
-                OnPropertyChanged(nameof(NewTaskName));
+                OnPropertyChanged();
+                
             }
         }
+        // <ListView ItemsSource="{Binding CollectionOfTasks}" HasUnevenRows="True"
+       // SelectedItem="{Binding SelectedTask}">
 
-        private TaskName selectedTask;
-        public TaskName SelectedTask
-        {
-            get { return selectedTask; }
-            set
-            {
-                selectedTask = value;
-                OnPropertyChanged(nameof(SelectedTask));
-            }
-        }
+
+        //private TaskName selectedTask;
+        //public TaskName SelectedTask
+        //{
+        //    get { return selectedTask; }
+        //    set
+        //    {
+        //        selectedTask = value;
+        //    }
+        //}
 
 
         private ICommand addNewTask;
@@ -64,11 +65,17 @@ namespace ToDoList.ViewModel
             get
             {
                 if (deleteTask == null)
-                    deleteTask = new Command<object>(
+                    deleteTask = new Command<TaskName>(
                         o =>
                         {
-                            CollectionOfDeletedTasks.Add(SelectedTask);
-                            CollectionOfTasks.Remove(SelectedTask);
+                            //jak cos to odwroc cepie
+                            // CollectionOfDeletedTasks.Add(SelectedTask);
+                            // CollectionOfTasks.Remove(SelectedTask);
+                            TaskName deletedTaskName = new TaskName();
+                            deletedTaskName.NameOfTask = o.NameOfTask;
+                            deletedTaskName.StateOfaTask = o.StateOfaTask;
+                            CollectionOfDeletedTasks.Add(deletedTaskName);
+                            CollectionOfTasks.Remove(o);
                         }
                         );
                 return deleteTask;
@@ -77,8 +84,8 @@ namespace ToDoList.ViewModel
 
         public ViewModel()
         {
-            CollectionOfTasks = new ObservableCollection<TaskName>();
-          
+            CollectionOfTasks = new ObservableCollection<TaskName>();    
+            CollectionOfDeletedTasks = new ObservableCollection<TaskName>();
         }
     }
 }

@@ -11,12 +11,19 @@
     </Window.DataContext>
     <StackPanel Background="#FFA3B4A2">
        
-        <StackPanel>
+        
             <TextBlock Text="Liczba zwycięstw:" FontSize="20"/>
             <Separator/>
-            <TextBlock Text="Gracz O:" FontSize="15"/>
-            <TextBlock Text="Gracz X:" FontSize="15"/>
-        </StackPanel>
+            <StackPanel HorizontalAlignment="Left" >
+                <TextBlock Text="O:" FontSize="15" />
+                <TextBlock Text="{Binding OWins}" FontSize="15"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right">
+                <TextBlock Text="X:" FontSize="15"/>
+                <TextBlock Text="{Binding XWins}" FontSize="15"/>
+            </StackPanel>
+            
+      
         <StackPanel>
             <ItemsControl ItemsSource="{Binding BoardList}" >
                 <ItemsControl.ItemsPanel>

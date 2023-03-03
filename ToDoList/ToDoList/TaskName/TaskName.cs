@@ -10,5 +10,7 @@ namespace ToDoList.Task
         public string NameOfTask { get; set; }
         
         public bool IsCompleted { get; set; }
+        public string StateOfaTask { get; set;  }
+
     }
 }

@@ -18,6 +18,7 @@
                Placeholder="bruh"
                PlaceholderColor="Black"
                BackgroundColor="White"
+              Text="{Binding NewTaskName}"
             />
         <Button HorizontalOptions="Center" 
                 BackgroundColor="#E7DEC8"
@@ -34,18 +35,22 @@
             />
       
         <ListView ItemsSource="{Binding CollectionOfTasks}" HasUnevenRows="True"
-                  SelectedItem="{Binding SelectedTask}">
+                >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
+                        <StackLayout BackgroundColor="#7C9473" RadioButtonGroup.SelectedValue="{Binding StateOfaTask}"
+                                     RadioButtonGroup.GroupName="{Binding NameOfTask}">
                             <Label Text="Nazwa zadania:"/>
-                            <Label Text="{Binding NewTaskName}" BackgroundColor="#FCF8E8"/>
-                            <RadioButton Content="Do zrobienia" TextColor="#7C9473" BackgroundColor="White"/>
-                            <RadioButton Content="Zrobione" TextColor="#7C9473" BackgroundColor="White"/>
+                            <Label Text="{Binding NameOfTask}" 
+                                    TextColor="Black"/>
+                    
+                            <RadioButton Content="Do zrobienia" Value="Do Zrobienia" TextColor="#7C9473" BackgroundColor="White"/>
+                            <RadioButton Content="Zrobione" Value="Zrobione" TextColor="#7C9473" BackgroundColor="White" />
+                            
                             <Button Text="Usuń" Command="{Binding Source={x:Reference thisPage}, 
-                                Path=BindingContext.DeleteTask}"
-                                    CommandParameter="{Binding}"/>
+                                Path=BindingContext.DeleteTask}" CommandParameter="{Binding}"
+                                    />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -53,13 +58,16 @@
         </ListView>
 
         <ListView ItemsSource="{Binding CollectionOfDeletedTasks}" HasUnevenRows="True"
-               >
+               BackgroundColor="#7C9473" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
+                        <StackLayout >
                             <Label Text="Nazwa usuniętego zadania:"/>
-                            <Label Text="{Binding NameOfTask}" BackgroundColor="#FCF8E8"/>
+                            <Label Text="{Binding NameOfTask}" 
+                                     TextColor="Black"/>
+
+                            <Label Text="{Binding StateOfaTask}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

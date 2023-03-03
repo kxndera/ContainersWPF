@@ -10,18 +10,18 @@ namespace TicTacToe.TTTViewModel
 {
     internal class TTTViewModel : ObserverVM
     {
-        private ICommand StartGameCommand;
+        private ICommand _startGameCommand;
 
-        public ICommand _startGameCommand
+        public ICommand StartGameCommand
         {
             get { return _startGameCommand; }
             set { _startGameCommand = value;
                 OnPropertyChanged(nameof(StartGameCommand));
             }
         }
-        private ICommand ButtonClick;
+        private ICommand _buttonClick;
 
-        public ICommand _buttonClick
+        public ICommand ButtonClick
         {
             get { return _buttonClick; }
             set { _buttonClick = value;
