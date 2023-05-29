@@ -43,7 +43,7 @@ namespace ClockWpfApp.ViewModels
                 {
                     CurrentTime = DateTime.Now.ToString("HH:mm:ss");
                     Thread.Sleep(1000);
-                    // jak ty sie chcesz wyspac ????
+                    
                 }
                
             });
