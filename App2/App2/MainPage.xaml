@@ -3,22 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+    <StackLayout Margin="20">
+        <Label Text="Właściwości czcionki" BackgroundColor="#558b2f" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
+        <Label x:Name="LabelValue" FontSize="Medium" />
+        <Slider x:Name="SliderValue" Maximum="40" DragCompleted="SliderValue_DragCompleted"/>
+        <Label x:Name="QuoteLabel" Text="Dzień dobry" TextColor="Black"/>
+        <Button Text=">>" BackgroundColor="#558b2f" Clicked="Button_Clicked"
+                HorizontalOptions="Center" TextColor ="White"/>
     </StackLayout>
 
 </ContentPage>

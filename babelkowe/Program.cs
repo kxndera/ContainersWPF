@@ -1,29 +1,40 @@
-﻿int[] a = new int[100];
-Random r = new Random();
-for (int i = 0; i < a.Length; i++)
+﻿int[] tab = new int[100];
+Random random = new Random();
+for (int i = 0; i < tab.Length; i++)
 {
-    a[i] = r.Next(0,100);
-}
-void Sortowanie(int[] a)
-{
-    int tmp = a.Length;
-    do
-    {
-        for (int i = 0; i < tmp - 1; i++)
-        {
-            if (a[i] > a[i + 1])
-            {
-                int b = a[i];
-                a[i] = a[i + 1];
-                a[i + 1] = b;
-            }
-        }
-        tmp--;
-    } while (tmp > 1);
+    tab[i] = random.Next(0,1000);
 }
 
-Sortowanie(a);
+/************************
+  nazwa funkcji: Sorting
+  parametry wejściowe: int[] a - tablica z losowymi wartościami od 0 do 1000
+
+ wartość zwracana: posortowane wartosci tablicy
+
+ informacje: modyfikuje tablicę i segreguje wartości sortowaniem bąbelkowe
+
+ autor:  早川あき
+   ************************/
+void Sorting(int[] a)
+{
+    int number = a.Length;
+    do
+    {
+        for (int i = 0; i < number - 1; i++)
+        {
+            if (tab[i] > tab[i + 1])
+            {
+                int tmp = tab[i];
+                tab[i] = tab[i + 1];
+                tab[i + 1] = tmp;
+            }
+        }
+        number--;
+    } while (number > 1);
+}
+
+Sorting(tab);
 Console.WriteLine("posortowana tablica:");
-foreach (int i in a)
+foreach (int i in tab)
     Console.Write(i + "; ");
     

@@ -21,6 +21,7 @@ bool[] A = new bool[101];
  autor:  早川あき
    ************************/
 
+/* nazewnictwo do poprawy*/
 void IsPrimeNumber(bool[] a)
 {
     for (int i = 2; Math.Sqrt(n) > i; i++)
